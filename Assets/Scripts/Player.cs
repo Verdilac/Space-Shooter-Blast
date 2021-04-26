@@ -106,12 +106,12 @@ public class Player : MonoBehaviour
     {
       
         _tripleShotActive = true;
-        StartCoroutine(TripleSHotPowerDownRoutine());
+        StartCoroutine(TripleShotPowerDownRoutine());
 
 
     }
 
-    IEnumerator TripleSHotPowerDownRoutine()
+    IEnumerator TripleShotPowerDownRoutine()
     {
             yield return new WaitForSeconds(5.0f);
             _tripleShotActive = false;
