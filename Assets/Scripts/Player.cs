@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _fireRate = 0.15f;
     [SerializeField] private int _lives = 3;
     private SpawnManager _spawnManager;
-    private bool _tripleShotActive = false ;
+    [SerializeField]private bool _tripleShotActive = false;
 
     
     private float _canFire = -1f;
@@ -84,7 +84,7 @@ public class Player : MonoBehaviour
         {
             _canFire = Time.time + _fireRate;
             Instantiate(_tripleShotPrefab, transform.position + new Vector3(0, 1.2f, 0), Quaternion.identity);
-            _tripleShotActive = false;
+           //  _tripleShotActive = false;
         }
         
        
@@ -104,7 +104,17 @@ public class Player : MonoBehaviour
 
     public void ActivateTripleShot()
     {
+      
         _tripleShotActive = true;
+        StartCoroutine(TripleSHotPowerDownRoutine());
+
+
+    }
+
+    IEnumerator TripleSHotPowerDownRoutine()
+    {
+            yield return new WaitForSeconds(5.0f);
+            _tripleShotActive = false;
     }
 
 }

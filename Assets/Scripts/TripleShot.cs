@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TripleShot : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] private float _speed = 3.0f;
     void Start()
     {
         
@@ -13,6 +13,11 @@ public class TripleShot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (transform.position.y < -6.59)
+        {
+            Destroy(this.gameObject);
+        }
+        transform.Translate(Vector3.down*_speed * Time.deltaTime);
         
     }
 
@@ -20,8 +25,14 @@ public class TripleShot : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            other.transform.GetComponent<Player>().ActivateTripleShot();
-            Destroy(this.gameObject);
+            Player player =  other.transform.GetComponent<Player>();
+            
+            if (player!= null)
+            {
+                player.ActivateTripleShot();
+                Destroy(this.gameObject);
+            }
+            
         }
 
 
