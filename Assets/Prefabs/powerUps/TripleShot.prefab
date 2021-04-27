@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 3459127768050023438}
   - component: {fileID: 3459127768050023439}
   - component: {fileID: 3459127768050023432}
-  - component: {fileID: 3459127768050023433}
   - component: {fileID: 259468626}
+  - component: {fileID: 3339465428874007341}
   m_Layer: 0
   m_Name: TripleShot
   m_TagString: TripleShot
@@ -132,19 +132,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.109761, y: 4.10976}
   m_EdgeRadius: 0
---- !u!114 &3459127768050023433
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3459127768050023434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee000d20644605942bb775b2d36d9860, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 3
 --- !u!95 &259468626
 Animator:
   serializedVersion: 3
@@ -164,3 +151,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3339465428874007341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3459127768050023434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee000d20644605942bb775b2d36d9860, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 3

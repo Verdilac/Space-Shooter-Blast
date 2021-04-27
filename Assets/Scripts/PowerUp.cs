@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TripleShot : MonoBehaviour
+public class PowerUp : MonoBehaviour
 {
     [SerializeField] private float _speed = 3.0f;
+    [SerializeField] private int _powerUpID;
     void Start()
     {
         
@@ -29,7 +30,21 @@ public class TripleShot : MonoBehaviour
             
             if (player!= null)
             {
-                player.ActivateTripleShot();
+                if (_powerUpID == 0)
+                {
+                     player.ActivateTripleShot();
+                }
+                else if(_powerUpID == 1)
+                {
+                    Debug.Log("Speed Collected");
+                }
+                else if (_powerUpID == 2)
+                {
+                    Debug.Log("Sheild Collected");
+                }
+
+
+              
                 Destroy(this.gameObject);
             }
             
