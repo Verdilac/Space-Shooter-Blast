@@ -6,15 +6,17 @@ public class Player : MonoBehaviour
 {
 
     //[SerializeField] GameObject player;
-    [SerializeField] private float _speed = 3.5f;
+    [SerializeField] private float _speed = 7.0f;
     [SerializeField] public GameObject _laserPrefab;
     [SerializeField] private GameObject _tripleShotPrefab;
     [SerializeField] private float _fireRate = 0.15f;
     [SerializeField] private int _lives = 3;
     private SpawnManager _spawnManager;
     [SerializeField]private bool _tripleShotActive = false;
+    [SerializeField] private bool _speedBoostActive = false;
 
-    
+
+
     private float _canFire = -1f;
 
     void Start()
@@ -56,7 +58,12 @@ public class Player : MonoBehaviour
 
 
         //time.delta time is the time you have between 2 frames typically very close to 1 second.
+
+     
+     
         transform.Translate(direction * _speed * Time.deltaTime);
+     
+       
 
         if (transform.position.x > 11.35)
         {
@@ -106,15 +113,35 @@ public class Player : MonoBehaviour
     {
       
         _tripleShotActive = true;
-        StartCoroutine(TripleShotPowerDownRoutine());
+        StartCoroutine(PowerDownRoutine());
 
 
     }
-
-    IEnumerator TripleShotPowerDownRoutine()
+    public void ActivateSpeedBoost()
     {
+
+        _speedBoostActive= true;
+        StartCoroutine(PowerDownRoutine());
+        _speed = 14.0f;
+        
+
+    }
+
+    IEnumerator PowerDownRoutine()
+    {
+        if (_tripleShotActive)
+        {
             yield return new WaitForSeconds(5.0f);
             _tripleShotActive = false;
+        }
+        if (_speedBoostActive)
+        {
+            yield return new WaitForSeconds(5.0f);
+            _speedBoostActive= false;
+            _speed = 7.0f;
+        }
+           
     }
+
 
 }

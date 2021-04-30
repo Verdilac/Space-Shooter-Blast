@@ -6,6 +6,11 @@ public class PowerUp : MonoBehaviour
 {
     [SerializeField] private float _speed = 3.0f;
     [SerializeField] private int _powerUpID;
+    /*Powerup ID
+     * 0 = Triple Shot
+     * 1 = Speed
+     * 2 = Sheilds
+    */
     void Start()
     {
         
@@ -30,18 +35,21 @@ public class PowerUp : MonoBehaviour
             
             if (player!= null)
             {
-                if (_powerUpID == 0)
+              
+                switch (_powerUpID)
                 {
-                     player.ActivateTripleShot();
+                    case 0:
+                        player.ActivateTripleShot();
+                        break;
+                    case 1:
+                        player.ActivateSpeedBoost();
+                        break;
+                    case 2:
+                        Debug.Log("Sheild Collected");
+                        break;
+
                 }
-                else if(_powerUpID == 1)
-                {
-                    Debug.Log("Speed Collected");
-                }
-                else if (_powerUpID == 2)
-                {
-                    Debug.Log("Sheild Collected");
-                }
+
 
 
               

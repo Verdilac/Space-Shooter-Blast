@@ -5,16 +5,22 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     [SerializeField] public GameObject _enemyPrefab;
-    [SerializeField ] private GameObject _enemyContainer;
+    [SerializeField] private GameObject _enemyContainer;
     [SerializeField] private GameObject _tripleShotPrefab;
+    [SerializeField] private GameObject _speedBoostPrefab;
+    [SerializeField]GameObject[] _powerUps;
     private bool _stopSpawning = false;
     private bool _stopPowerups = false;
     void Start()
     {
-         StartCoroutine(SpawnEnemyRoutine());
+
+      
+
+
+        StartCoroutine(SpawnEnemyRoutine());
 
         
-         StartCoroutine(SpawnPowerupRoutine());
+        StartCoroutine(SpawnPowerupRoutine());
     }
 
   
@@ -31,6 +37,7 @@ public class SpawnManager : MonoBehaviour
                 GameObject newEnemy =  Instantiate(_enemyPrefab, posToSpawn,Quaternion.identity);
                 newEnemy.transform.parent = _enemyContainer.transform;
                 yield return new WaitForSeconds(5.0f);
+                
             }
         }
 
@@ -39,19 +46,20 @@ public class SpawnManager : MonoBehaviour
         while(_stopPowerups ==false)
         {
             Vector3 posToSpawn = Xrandomize(-8.70f, 8.70f);
+            int whichPowerUp = Random.Range(0, 2);
 
             //makes sense to add power ups a bit later.
             if (Time.deltaTime > 10)
             {
                 yield return new WaitForSeconds(Random.Range(7,12));
                 //12 is exclusive make it float to include max
-                GameObject newPowerup = Instantiate(_tripleShotPrefab, posToSpawn, Quaternion.identity);
+                GameObject newPowerup = Instantiate(_powerUps[whichPowerUp], posToSpawn, Quaternion.identity);
             }
         
             else
             {
                 yield return new WaitForSeconds(11);
-                GameObject newPowerup = Instantiate(_tripleShotPrefab, posToSpawn, Quaternion.identity);
+                GameObject newPowerup = Instantiate(_powerUps[whichPowerUp], posToSpawn, Quaternion.identity);
             }
         }
      
