@@ -5,15 +5,20 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    //[SerializeField] GameObject player;
+    
     [SerializeField] private float _speed = 7.0f;
     [SerializeField] public GameObject _laserPrefab;
     [SerializeField] private GameObject _tripleShotPrefab;
+    [SerializeField] private GameObject _sheildVisualizer;
     [SerializeField] private float _fireRate = 0.15f;
     [SerializeField] private int _lives = 3;
     private SpawnManager _spawnManager;
     [SerializeField]private bool _tripleShotActive = false;
-    [SerializeField] private bool _speedBoostActive = false;
+    [SerializeField] public bool _speedBoostActive = false;
+    [SerializeField] private bool _sheildActive = false;
+    [SerializeField] Enemy _enemy;
+    [SerializeField] Transform _enemyContainer;
+
 
 
 
@@ -99,6 +104,12 @@ public class Player : MonoBehaviour
 
     public void Damage()
     {
+        if (_sheildActive)
+        {
+            _sheildVisualizer.SetActive(false);
+            _sheildActive = false;
+            return;
+        }
         _lives --;
 
         if (_lives < 1)
@@ -123,8 +134,31 @@ public class Player : MonoBehaviour
         _speedBoostActive= true;
         StartCoroutine(PowerDownRoutine());
         _speed = 14.0f;
-        
 
+        foreach (Transform enemy in _enemyContainer)
+        {
+            _enemy.ChangeSpeed(8.0f);
+        }
+
+        Transform[] allchildren = _enemyContainer.GetComponentsInChildren<Transform>();
+        foreach (Transform child in allchildren)
+        {
+            _enemy.ChangeSpeed(8.0f);
+        }
+
+
+
+
+
+    }
+
+    public void ActivateSheild()
+    {
+        _sheildVisualizer.SetActive(true);
+        _sheildActive = true;
+
+
+    
     }
 
     IEnumerator PowerDownRoutine()
@@ -138,9 +172,31 @@ public class Player : MonoBehaviour
         {
             yield return new WaitForSeconds(5.0f);
             _speedBoostActive= false;
+
+
+            foreach (Transform enemy in _enemyContainer)
+            {
+                _enemy.ChangeSpeed(4.0f);
+            }
+
             _speed = 7.0f;
         }
+   
+
            
+    }
+
+    public bool CheckSpeed()
+    {
+        if (_speedBoostActive)
+        {
+            return true;
+        }
+        else
+        {
+            return false;   
+        }
+
     }
 
 

@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    [SerializeField] private GameObject _player;
     [SerializeField] public GameObject _enemyPrefab;
+    [SerializeField] Enemy _enemy;
     [SerializeField] private GameObject _enemyContainer;
     [SerializeField] private GameObject _tripleShotPrefab;
     [SerializeField] private GameObject _speedBoostPrefab;
@@ -14,7 +16,7 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
 
-      
+        
 
 
         StartCoroutine(SpawnEnemyRoutine());
@@ -32,11 +34,45 @@ public class SpawnManager : MonoBehaviour
         {
             while (_stopSpawning == false)
             {
-                float randomX = Random.Range(-8.70f, 8.70f);
-                Vector3 posToSpawn = new Vector3(randomX, 6.44f, 0);
+
+          
+                
+                
+            float randomX = Random.Range(-8.70f, 8.70f);
+            Vector3 posToSpawn = new Vector3(randomX, 6.44f, 0);
+            
+       
+         
+        
                 GameObject newEnemy =  Instantiate(_enemyPrefab, posToSpawn,Quaternion.identity);
                 newEnemy.transform.parent = _enemyContainer.transform;
-                yield return new WaitForSeconds(5.0f);
+                
+            if (_player.GetComponent<Player>()._speedBoostActive)
+            {
+                newEnemy.GetComponent<Enemy>().ChangeSpeed(8.0f);
+
+
+                Transform[] allchildren = _enemyContainer.GetComponentsInChildren<Transform>();
+                foreach (Transform child in allchildren)
+                {
+                    _enemy.ChangeSpeed(8.0f);
+                }
+            }
+            else
+            {
+                newEnemy.GetComponent<Enemy>().ChangeSpeed(4.0f);
+            }
+                
+        
+            yield return new WaitForSeconds(5.0f);
+           
+
+
+            //check for is the speed boost is active through player and instanciate second enemy prefab if the speed is collected
+        
+            
+                
+
                 
             }
         }
@@ -46,7 +82,7 @@ public class SpawnManager : MonoBehaviour
         while(_stopPowerups ==false)
         {
             Vector3 posToSpawn = Xrandomize(-8.70f, 8.70f);
-            int whichPowerUp = Random.Range(0, 2);
+            int whichPowerUp = Random.Range(0, 3);
 
             //makes sense to add power ups a bit later.
             if (Time.deltaTime > 10)
@@ -78,5 +114,8 @@ public class SpawnManager : MonoBehaviour
         Vector3 posToSpawn = new Vector3(randomX, 6.44f, 0);
         return posToSpawn;
     }
+
+ 
+         
   
 }

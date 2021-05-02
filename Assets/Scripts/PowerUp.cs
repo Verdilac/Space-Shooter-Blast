@@ -6,6 +6,9 @@ public class PowerUp : MonoBehaviour
 {
     [SerializeField] private float _speed = 3.0f;
     [SerializeField] private int _powerUpID;
+  
+   
+    
     /*Powerup ID
      * 0 = Triple Shot
      * 1 = Speed
@@ -13,7 +16,11 @@ public class PowerUp : MonoBehaviour
     */
     void Start()
     {
+  
+
         
+
+
     }
 
     // Update is called once per frame
@@ -43,9 +50,10 @@ public class PowerUp : MonoBehaviour
                         break;
                     case 1:
                         player.ActivateSpeedBoost();
+                        
                         break;
                     case 2:
-                        Debug.Log("Sheild Collected");
+                        player.ActivateSheild();
                         break;
 
                 }
