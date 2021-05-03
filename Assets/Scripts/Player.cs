@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     [SerializeField] private bool _sheildActive = false;
     [SerializeField] Enemy _enemy;
     [SerializeField] Transform _enemyContainer;
-
+    [SerializeField] private bool simulascheck = false;
 
 
 
@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
         {
             Debug.LogError("The Spawn Manager is NULL");
         }
+    
         
 
     }
@@ -135,17 +136,11 @@ public class Player : MonoBehaviour
         StartCoroutine(PowerDownRoutine());
         _speed = 14.0f;
 
-        foreach (Transform enemy in _enemyContainer)
-        {
-            _enemy.ChangeSpeed(8.0f);
-        }
+        Debug.Log("Activate Speed Boost is getting called ");
 
-        Transform[] allchildren = _enemyContainer.GetComponentsInChildren<Transform>();
-        foreach (Transform child in allchildren)
-        {
-            _enemy.ChangeSpeed(8.0f);
-        }
 
+        
+      
 
 
 

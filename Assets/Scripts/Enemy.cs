@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
 
     [SerializeField] private float _speed = 4f;
+    [SerializeField] public bool sethis = false;
+    
     
     void Start()
     {
