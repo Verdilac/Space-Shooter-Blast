@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    
+
     [SerializeField] private float _speed = 7.0f;
     [SerializeField] public GameObject _laserPrefab;
     [SerializeField] private GameObject _tripleShotPrefab;
@@ -13,12 +13,14 @@ public class Player : MonoBehaviour
     [SerializeField] private float _fireRate = 0.15f;
     [SerializeField] private int _lives = 3;
     private SpawnManager _spawnManager;
-    [SerializeField]private bool _tripleShotActive = false;
+    [SerializeField] private bool _tripleShotActive = false;
     [SerializeField] public bool _speedBoostActive = false;
     [SerializeField] private bool _sheildActive = false;
     [SerializeField] Enemy _enemy;
     [SerializeField] Transform _enemyContainer;
     [SerializeField] private bool simulascheck = false;
+    [SerializeField] private int _score;
+
 
 
 
@@ -192,6 +194,17 @@ public class Player : MonoBehaviour
             return false;   
         }
 
+    }
+
+    public void   ChangeScore()
+    {
+        _score += 10;
+       
+    }
+
+    public int getScore()
+    {
+        return _score;
     }
 
 
